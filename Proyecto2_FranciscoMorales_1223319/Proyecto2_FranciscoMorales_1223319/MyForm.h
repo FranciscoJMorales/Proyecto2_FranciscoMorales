@@ -92,7 +92,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(61, 38);
+			this->label1->Location = System::Drawing::Point(113, 38);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(88, 24);
 			this->label1->TabIndex = 0;
@@ -101,7 +101,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(30, 97);
+			this->label2->Location = System::Drawing::Point(82, 97);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(46, 13);
 			this->label2->TabIndex = 1;
@@ -110,7 +110,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(12, 139);
+			this->label3->Location = System::Drawing::Point(64, 139);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(64, 13);
 			this->label3->TabIndex = 2;
@@ -119,7 +119,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(102, 200);
+			this->label4->Location = System::Drawing::Point(154, 200);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(13, 13);
 			this->label4->TabIndex = 3;
@@ -127,14 +127,14 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			// 
 			// usuarioTbx
 			// 
-			this->usuarioTbx->Location = System::Drawing::Point(82, 94);
+			this->usuarioTbx->Location = System::Drawing::Point(134, 94);
 			this->usuarioTbx->Name = L"usuarioTbx";
 			this->usuarioTbx->Size = System::Drawing::Size(100, 20);
 			this->usuarioTbx->TabIndex = 4;
 			// 
 			// iniciarBtn
 			// 
-			this->iniciarBtn->Location = System::Drawing::Point(65, 175);
+			this->iniciarBtn->Location = System::Drawing::Point(117, 175);
 			this->iniciarBtn->Name = L"iniciarBtn";
 			this->iniciarBtn->Size = System::Drawing::Size(92, 23);
 			this->iniciarBtn->TabIndex = 7;
@@ -144,7 +144,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			// 
 			// registrarBtn
 			// 
-			this->registrarBtn->Location = System::Drawing::Point(65, 217);
+			this->registrarBtn->Location = System::Drawing::Point(117, 217);
 			this->registrarBtn->Name = L"registrarBtn";
 			this->registrarBtn->Size = System::Drawing::Size(92, 23);
 			this->registrarBtn->TabIndex = 9;
@@ -163,7 +163,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			// 
 			// contraseñaTbx
 			// 
-			this->contraseñaTbx->Location = System::Drawing::Point(82, 136);
+			this->contraseñaTbx->Location = System::Drawing::Point(134, 136);
 			this->contraseñaTbx->Name = L"contraseñaTbx";
 			this->contraseñaTbx->PasswordChar = '*';
 			this->contraseñaTbx->Size = System::Drawing::Size(100, 20);
@@ -171,7 +171,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			// 
 			// importarBtn
 			// 
-			this->importarBtn->Location = System::Drawing::Point(60, 270);
+			this->importarBtn->Location = System::Drawing::Point(112, 270);
 			this->importarBtn->Name = L"importarBtn";
 			this->importarBtn->Size = System::Drawing::Size(103, 23);
 			this->importarBtn->TabIndex = 10;
@@ -187,7 +187,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(221, 324);
+			this->ClientSize = System::Drawing::Size(319, 324);
 			this->Controls->Add(this->importarBtn);
 			this->Controls->Add(this->contraseñaTbx);
 			this->Controls->Add(this->label5);
@@ -292,11 +292,11 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			}
 			if (usuarios != "A") {
 				agenda = gcnew MyForm1(user);
-				user = user->Substring(0, user->IndexOf("\r\n") + 2);
-				StreamWriter^ escritor = gcnew StreamWriter("..//Users.txt", true);
+				StreamWriter^ escritor = gcnew StreamWriter("..//" + nombre + ".txt");
 				escritor->Write(user);
 				escritor->Close();
-				escritor = gcnew StreamWriter("..//" + nombre + ".txt");
+				user = user->Substring(0, user->IndexOf("\r\n") + 2);
+				escritor = gcnew StreamWriter("..//Users.txt", true);
 				escritor->Write(user);
 				escritor->Close();
 				MessageBox::Show("La agenda se importó exitosamente", "Carga finalizada");

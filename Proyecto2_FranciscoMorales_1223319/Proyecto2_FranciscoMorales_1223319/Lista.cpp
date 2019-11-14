@@ -6,6 +6,7 @@ Lista::Lista()
 {
 	head = nullptr;
 	tail = nullptr;
+	length = 0;
 }
 
 
@@ -58,6 +59,10 @@ Evento *Lista::Eliminar(int posicion) {
 	}
 }
 
+System::String^Lista::String() {
+	return StringRecursivo(head);
+}
+
 void Lista::AgregarRecursivo(Evento *nuevo, Evento *pos) {
 	if (pos->sig != nullptr) {
 		AgregarRecursivo(nuevo, pos->sig);
@@ -88,5 +93,19 @@ Evento *Lista::EliminarRecursivo(Evento *pos, int cantidad) {
 		pos->sig = nullptr;
 		length--;
 		return pos;
+	}
+}
+
+System::String^Lista::StringRecursivo(Evento *pos) {
+	if (pos != nullptr) {
+		if (pos->sig == nullptr) {
+			return pos->ToString();
+		}
+		else {
+			return pos->ToString() + StringRecursivo(pos->sig);
+		}
+	}
+	else {
+		return "";
 	}
 }

@@ -1,1 +1,4 @@
 Oscar,childsplay
+Actividad,0,Nuevos héroes,15/11/2019,9:30,9:40,9,Francisco,Casa,Orbes
+Recordatorio,1,Parcial,14/11/2019,10:40,5
+Alarma,2,Estudiar,14/11/2019,9:00,8

@@ -7,12 +7,13 @@ class Actividad : public Evento
 {
 public:
 	int horaFin;
-	Actividad *sig;
+	int minutosFin;
 	std::string personas;
 	std::string lugar;
 	std::string materiales;
 
-	Actividad(System::String^ ID, System::String^ Description);
+	Actividad(System::String^ info);
+	Actividad(int ID, System::String^ info, System::DateTime^ fecha, int hF, int minF, int P, System::String^ people, System::String^ place, System::String^ material);
 	~Actividad();
 	System::String^ Actividad::ToString() const override;
 };

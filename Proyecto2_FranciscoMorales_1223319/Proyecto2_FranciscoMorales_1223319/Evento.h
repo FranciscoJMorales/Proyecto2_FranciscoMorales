@@ -11,12 +11,14 @@ public:
 	int mes;
 	int día;
 	int horaInicio;
-	std::string id;
+	int minutosInicio;
+	int id;
 	std::string descripción;
 	int prioridad;
 
 	Evento();
 	~Evento();
+	System::DateTime^ Evento::FechaInicio();
 	virtual System::String^ Evento::ToString() const = 0;
 };
 

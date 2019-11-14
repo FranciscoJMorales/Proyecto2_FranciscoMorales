@@ -13,3 +13,6 @@ Evento::~Evento()
 {
 }
 
+System::DateTime^ Evento::FechaInicio() {
+	return gcnew System::DateTime(año, mes, día);
+}
