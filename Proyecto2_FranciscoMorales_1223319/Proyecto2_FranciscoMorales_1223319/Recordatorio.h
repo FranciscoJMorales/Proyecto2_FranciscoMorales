@@ -7,7 +7,7 @@ class Recordatorio : public Evento
 {
 public:
 	Recordatorio(System::String^ info);
-	Recordatorio(int ID, System::String^ info, System::DateTime^ fecha, int hF, int minF, int P);
+	Recordatorio(int ID, System::String^ info, System::DateTime^ fecha, int P);
 	Recordatorio();
 	~Recordatorio();
 	void Recordatorio::Postponer();

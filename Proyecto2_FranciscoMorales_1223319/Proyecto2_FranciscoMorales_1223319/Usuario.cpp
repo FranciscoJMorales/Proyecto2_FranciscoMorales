@@ -26,7 +26,7 @@ Usuario::Usuario(String^ info)
 }
 
 void Usuario::Agregar(Evento *nuevo) {
-	nuevo->id = eventos->length;
+	nuevo->id = ObtenerNuevoId();
 	eventos->Agregar(nuevo);
 	StreamWriter^ escritor = gcnew StreamWriter("..//" + nombre + ".txt", true);
 	escritor->Write(nuevo->ToString());
@@ -141,4 +141,19 @@ String^ Usuario::MostrarTareasDía(DateTime^ day) {
 		i = i->sig;
 	}
 	return tareas;
+}
+
+int Usuario::ObtenerNuevoId() {
+	int ID = 0;
+	Evento* i = eventos->head;
+	if (i == nullptr) {
+		return 0;
+	}
+	while (i != nullptr) {
+		if (i->id >= ID) {
+			ID = i->id + 1;
+		}
+		i = i->sig;
+	}
+	return ID;
 }

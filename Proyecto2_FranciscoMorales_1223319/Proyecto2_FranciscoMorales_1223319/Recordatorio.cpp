@@ -24,7 +24,7 @@ Recordatorio::Recordatorio(System::String^ info)
 }
 
 
-Recordatorio::Recordatorio(int ID, System::String^ info, System::DateTime^ fecha, int hF, int minF, int P)
+Recordatorio::Recordatorio(int ID, System::String^ info, System::DateTime^ fecha, int P)
 {
 	sig = nullptr;
 	ant = nullptr;

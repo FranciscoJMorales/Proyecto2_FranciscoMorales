@@ -5,6 +5,7 @@
 #include "Recordatorio.h"
 #include "Alarma.h"
 #include "Usuario.h"
+#include "MyForm2.h"
 
 namespace Proyecto2_FranciscoMorales_1223319 {
 
@@ -56,6 +57,8 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 	private: System::Windows::Forms::Label^  tareasLbl;
 
 	private: System::Windows::Forms::RichTextBox^  tareasTbx;
+	private: System::Windows::Forms::Label^  label4;
+	private: System::Windows::Forms::Button^  agregarBtn;
 
 	protected:
 
@@ -83,6 +86,8 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			this->fechaBtn = (gcnew System::Windows::Forms::Button());
 			this->tareasLbl = (gcnew System::Windows::Forms::Label());
 			this->tareasTbx = (gcnew System::Windows::Forms::RichTextBox());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->agregarBtn = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// calendario
@@ -97,7 +102,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(186, 9);
+			this->label1->Location = System::Drawing::Point(260, 9);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(88, 24);
 			this->label1->TabIndex = 1;
@@ -141,7 +146,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			this->fechaBtn->Name = L"fechaBtn";
 			this->fechaBtn->Size = System::Drawing::Size(98, 23);
 			this->fechaBtn->TabIndex = 6;
-			this->fechaBtn->Text = L"Cambiar fecha:";
+			this->fechaBtn->Text = L"Cambiar fecha";
 			this->fechaBtn->UseVisualStyleBackColor = true;
 			this->fechaBtn->Click += gcnew System::EventHandler(this, &MyForm1::fechaBtn_Click);
 			// 
@@ -158,15 +163,36 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			// 
 			this->tareasTbx->Location = System::Drawing::Point(294, 71);
 			this->tareasTbx->Name = L"tareasTbx";
-			this->tareasTbx->Size = System::Drawing::Size(156, 154);
+			this->tareasTbx->Size = System::Drawing::Size(304, 154);
 			this->tareasTbx->TabIndex = 8;
 			this->tareasTbx->Text = L"";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(291, 247);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(163, 13);
+			this->label4->TabIndex = 9;
+			this->label4->Text = L"Seleccione un día del calendario";
+			// 
+			// agregarBtn
+			// 
+			this->agregarBtn->Location = System::Drawing::Point(318, 274);
+			this->agregarBtn->Name = L"agregarBtn";
+			this->agregarBtn->Size = System::Drawing::Size(98, 23);
+			this->agregarBtn->TabIndex = 10;
+			this->agregarBtn->Text = L"Agregar tarea";
+			this->agregarBtn->UseVisualStyleBackColor = true;
+			this->agregarBtn->Click += gcnew System::EventHandler(this, &MyForm1::agregarBtn_Click);
 			// 
 			// MyForm1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(462, 322);
+			this->ClientSize = System::Drawing::Size(610, 322);
+			this->Controls->Add(this->agregarBtn);
+			this->Controls->Add(this->label4);
 			this->Controls->Add(this->tareasTbx);
 			this->Controls->Add(this->tareasLbl);
 			this->Controls->Add(this->fechaBtn);
@@ -178,12 +204,14 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			this->Controls->Add(this->calendario);
 			this->Name = L"MyForm1";
 			this->Text = L"Agenda";
+			this->EnabledChanged += gcnew System::EventHandler(this, &MyForm1::MyForm1_EnabledChanged);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	
+		MyForm2^ formulario;
 		Usuario^ persona;
 
 	private: System::Void OnClosing(System::Object^  sender, FormClosingEventArgs^  e) {
@@ -206,6 +234,16 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 		catch (...) {
 			MessageBox::Show("La fecha ingresada no es válida", "Error");
 		}
+	}
+
+	private: System::Void agregarBtn_Click(System::Object^  sender, System::EventArgs^  e) {
+		formulario = gcnew MyForm2(persona, calendario->SelectionStart);
+		formulario->Show(this);
+		this->Enabled = false;
+	}
+
+	private: System::Void MyForm1_EnabledChanged(System::Object^  sender, System::EventArgs^  e) {
+		MostrarTareas(calendario->SelectionStart);
 	}
 };
 }

@@ -24,7 +24,7 @@ Alarma::Alarma(System::String^ info)
 }
 
 
-Alarma::Alarma(int ID, System::String^ info, System::DateTime^ fecha, int hF, int minF, int P)
+Alarma::Alarma(int ID, System::String^ info, System::DateTime^ fecha, int P)
 {
 	sig = nullptr;
 	ant = nullptr;

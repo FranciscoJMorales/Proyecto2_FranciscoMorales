@@ -1,1 +1,6 @@
 Francisco,fireemblem
+Recordatorio,0,Entrega Proyecto,16/11/2019,0:0,9
+Alarma,1,Terminar proyecto,14/11/2019,0:0,8
+Recordatorio,2,Ejemplo,15/11/2019,16:0,7
+Actividad,3,Invocar,21/11/2019,10:10,10:15,5,Oscar,Casa,Orbes
+Recordatorio,4,Llorar,22/11/2019,7:0,6
