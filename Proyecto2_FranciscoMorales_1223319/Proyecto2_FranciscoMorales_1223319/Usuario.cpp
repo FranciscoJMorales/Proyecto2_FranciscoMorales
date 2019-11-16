@@ -41,72 +41,100 @@ String^ Usuario::Exportar() {
 
 void Usuario::Ordenar(int caso) {
 	Evento *i = eventos->head;
-	int n = 0;
 	bool intercambio = true;
 	do {
 		intercambio = false;
-		n = 0;
 		i = eventos->head;
-		while (n < eventos->length - 1) {
-			intercambio = Comparar(i, i->sig, caso);
-			n++;
-			i = i->sig;
+		while (i->sig != nullptr) {
+			if (Comparar(i, i->sig, caso) > 0) {
+				Intercambiar(i, i->sig);
+				intercambio = true;
+			}
+			else {
+				i = i->sig;
+			}
 		}
 	} while (intercambio);
 	StreamWriter^ escritor = gcnew StreamWriter("..//" + nombre + ".txt", false);
 	escritor->Write(Exportar());
 	escritor->Close();
 }
-Evento *Usuario::Buscar(int caso) {
-	return nullptr;
+
+String^ Usuario::Buscar(int caso, String^ valorBuscar) {
+	Evento *i = eventos->head;
+	Evento *valor = new Recordatorio();
+	DateTime^ fecha;
+	switch (caso) {
+	case 0:
+		valor->id = Convert::ToInt32(valorBuscar);
+		break;
+	case 1:
+		fecha = Convert::ToDateTime(valorBuscar);
+		valor->año = fecha->Year;
+		valor->mes = fecha->Month;
+		valor->día = fecha->Day;
+		caso = 3;
+		break;
+	case 2:
+		valor->prioridad = Convert::ToInt32(valorBuscar);
+		break;
+	}
+	String^ resultado = "";
+	while (i != nullptr) {
+		if (Comparar(i, valor, caso) == 0) {
+			resultado += i->ToString();
+		}
+		i = i->sig;
+	}
+	return resultado;
 }
 
-bool Usuario::Comparar(Evento *a, Evento *b, int caso) {
-	int c = a->FechaInicio()->CompareTo(b->FechaInicio());
-	if (a->FechaInicio()->CompareTo(b->FechaInicio()) > 0) {
-		Intercambiar(a, b);
-		return true;
-	}
-	else if (a->FechaInicio()->CompareTo(b->FechaInicio()) == 0) {
-		switch (caso) {
-		//Ordenar por identificador
-		case 0:
-			if (a->id > b->id) {
-				Intercambiar(a, b);
-				return true;
-			}
-			else {
-				return false;
-			}
-			break;
-		//Ordenar por fecha (incluyendo horas y minutos)
-		case 1:
-			if (a->horaInicio > b->horaInicio || (a->horaInicio == b->horaInicio && a->minutosInicio > b->minutosInicio)) {
-				Intercambiar(a, b);
-				return true;
-			}
-			else {
-				return false;
-			}
-			break;
-		//Ordenar por prioridad
-		case 2:
-			if (a->prioridad < b->prioridad) {
-				Intercambiar(a, b);
-				return true;
-			}
-			else {
-				return false;
-			}
-			break;
-		//Ordenar por fecha (Sin incluir horas y minutos)
-		case 3:
-			return false;
-			break;
+int Usuario::Comparar(Evento *a, Evento *b, int caso) {
+	switch (caso) {
+		//Identificador
+	case 0:
+		if (a->id > b->id) {
+			return 1;
 		}
-	}
-	else {
-		return false;
+		else if (a->id == b->id) {
+			return 0;
+		}
+		else {
+			return -1;
+		}
+		break;
+		//Fecha (incluyendo horas y minutos)
+	case 1:
+		if (a->FechaInicio()->CompareTo(b->FechaInicio()) == 0) {
+			if (a->horaInicio > b->horaInicio || (a->horaInicio == b->horaInicio && a->minutosInicio > b->minutosInicio)) {
+				return 1;
+			}
+			else if (a->horaInicio > b->horaInicio && a->minutosInicio == b->minutosInicio) {
+				return 0;
+			}
+			else {
+				return -1;
+			}
+		}
+		else {
+			return a->FechaInicio()->CompareTo(b->FechaInicio());
+		}
+		break;
+		//Ordenar por prioridad
+	case 2:
+		if (a->prioridad < b->prioridad) {
+			return 1;
+		}
+		else if (a->prioridad == b->prioridad) {
+			return 0;
+		}
+		else {
+			return -1;
+		}
+		break;
+	case 3:
+		return a->FechaInicio()->CompareTo(b->FechaInicio());
+		break;
 	}
 }
 
@@ -123,10 +151,14 @@ void Usuario::Intercambiar(Evento *a, Evento *b) {
 	else if (b == eventos->head) {
 		eventos->tail = a;
 	}
-	Evento *aux = b->sig;
 	a->sig = b->sig;
-	aux = a->ant;
+	if (a->sig != nullptr) {
+		a->sig->ant = a;
+	}
 	b->ant = a->ant;
+	if (b->ant != nullptr) {
+		b->ant->sig = b;
+	}
 	a->ant = b;
 	b->sig = a;
 }
@@ -156,4 +188,22 @@ int Usuario::ObtenerNuevoId() {
 		i = i->sig;
 	}
 	return ID;
+}
+
+void Usuario::RevisarEventos(DateTime^ hora) {
+	Evento *i = eventos->head;
+	while (i != nullptr) {
+		if (i->año == hora->Year && i->mes == hora->Month && i->día == hora->Day && i->horaInicio == hora->Hour && i->minutosInicio == hora->Minute) {
+			if(i->Mostrar()) {
+				System::DateTime^ fecha = gcnew System::DateTime(i->año, i->mes, i->día, i->horaInicio, i->minutosInicio, 0);
+				fecha = fecha->AddMinutes(5);
+				i->año = fecha->Year;
+				i->mes = fecha->Month;
+				i->día = fecha->Day;
+				i->horaInicio = fecha->Hour;
+				i->minutosInicio = fecha->Minute;
+			}
+		}
+		i = i->sig;
+	}
 }

@@ -50,3 +50,12 @@ System::String^ Alarma::ToString() const {
 	texto += System::Convert::ToString(prioridad) + "\r\n";
 	return texto;
 }
+
+bool Alarma::Mostrar() const {
+	if (System::Windows::Forms::MessageBox::Show(ToString() + "¿Deseas postponer la alarma?", "Alarma", System::Windows::Forms::MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::Yes) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}

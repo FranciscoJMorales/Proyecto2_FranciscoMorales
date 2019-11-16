@@ -11,4 +11,5 @@ public:
 	Alarma(int ID, System::String^ info, System::DateTime^ fecha, int P);
 	~Alarma();
 	System::String^ Alarma::ToString() const override;
+	bool Alarma::Mostrar() const override;
 };

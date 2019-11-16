@@ -50,20 +50,19 @@ Recordatorio::~Recordatorio()
 {
 }
 
-void Recordatorio::Postponer() {
-	System::DateTime^ fecha = gcnew System::DateTime(año, mes, día, horaInicio, minutosInicio, 0);
-	fecha->AddMinutes(5);
-	año = fecha->Year;
-	mes = fecha->Month;
-	día = fecha->Day;
-	horaInicio = fecha->Hour;
-	minutosInicio = fecha->Minute;
-}
-
 System::String^ Recordatorio::ToString() const {
 	System::String^ texto = "Recordatorio," + System::Convert::ToString(id) + "," + gcnew System::String(descripción.c_str()) + ",";
 	System::DateTime^ fechaIn = gcnew System::DateTime(año, mes, día);
 	texto += fechaIn->ToString("dd/MM/yyyy") + "," + System::Convert::ToString(horaInicio) + ":" + System::Convert::ToString(minutosInicio) + ",";
 	texto += System::Convert::ToString(prioridad) + "\r\n";
 	return texto;
+}
+
+bool Recordatorio::Mostrar() const {
+	if (System::Windows::Forms::MessageBox::Show(ToString() + "¿Deseas postponer el recordatorio?", "Recordatorio", System::Windows::Forms::MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::Yes) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }

@@ -20,5 +20,6 @@ public:
 	~Evento();
 	System::DateTime^ Evento::FechaInicio();
 	virtual System::String^ Evento::ToString() const = 0;
+	virtual bool Evento::Mostrar() const = 0;
 };
 

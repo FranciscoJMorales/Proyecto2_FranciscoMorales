@@ -10,6 +10,6 @@ public:
 	Recordatorio(int ID, System::String^ info, System::DateTime^ fecha, int P);
 	Recordatorio();
 	~Recordatorio();
-	void Recordatorio::Postponer();
 	System::String^ Recordatorio::ToString() const override;
+	bool Recordatorio::Mostrar() const override;
 };

@@ -65,3 +65,8 @@ System::String^ Actividad::ToString() const {
 	texto += gcnew System::String(personas.c_str()) + "," + gcnew System::String(lugar.c_str()) + "," + gcnew System::String(materiales.c_str()) + "\r\n";
 	return texto;
 }
+
+bool Actividad::Mostrar() const {
+	System::Windows::Forms::MessageBox::Show(ToString(), "Actividad");
+	return false;
+}

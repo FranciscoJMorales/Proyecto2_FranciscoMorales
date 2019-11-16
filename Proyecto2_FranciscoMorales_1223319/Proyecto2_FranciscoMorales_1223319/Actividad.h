@@ -16,5 +16,6 @@ public:
 	Actividad(int ID, System::String^ info, System::DateTime^ fecha, int hF, int minF, int P, System::String^ people, System::String^ place, System::String^ material);
 	~Actividad();
 	System::String^ Actividad::ToString() const override;
+	bool Actividad::Mostrar() const override;
 };
 

@@ -19,10 +19,12 @@ public:
 	void Usuario::Agregar(Evento *nuevo);
 	String^ Usuario::Exportar();
 	void Usuario::Ordenar(int caso);
-	Evento *Usuario::Buscar(int caso);
+	String^ Usuario::Buscar(int caso, String^ valorBuscar);
 	String^ Usuario::MostrarTareasDía(DateTime^ day);
 	int Usuario::ObtenerNuevoId();
+	void Usuario::RevisarEventos(DateTime^ hora);
+
 private:
-	bool Usuario::Comparar(Evento *a, Evento *b, int caso);
+	int Usuario::Comparar(Evento *a, Evento *b, int caso);
 	void Usuario::Intercambiar(Evento *a, Evento *b);
 };
