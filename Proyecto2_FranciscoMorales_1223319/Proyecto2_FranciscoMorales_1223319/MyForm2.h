@@ -325,6 +325,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 		ChangeEnabled();
 	}
 
+			 //Habilita o deshabilita los datos que son únicamente de las actividades
 	private: System::Void ChangeEnabled() {
 		if (actividadRbtn->Checked) {
 			finTbx->Enabled = true;
@@ -340,6 +341,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 		}
 	}
 
+			 //Agrega la tarea nueva a la lista de tareas del usuario
 	private: System::Void agregarBtn_Click(System::Object^  sender, System::EventArgs^  e) {
 		try {
 			Evento *nuevo = nullptr;
@@ -367,10 +369,11 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 			this->Close();
 		}
 		catch (...) {
-			MessageBox::Show("Los datos no son válidos", "Error la crear tarea");
+			MessageBox::Show("Los datos no son válidos", "Error al crear tarea");
 		}
 	}
 
+			 //Permite la utilización del formulario anterior
 	private: System::Void OnClosing(System::Object^  sender, FormClosingEventArgs^  e) {
 		this->Owner->Enabled = true;
 	}

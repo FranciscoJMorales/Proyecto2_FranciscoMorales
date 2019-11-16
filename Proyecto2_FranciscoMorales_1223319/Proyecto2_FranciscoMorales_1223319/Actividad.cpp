@@ -1,7 +1,7 @@
 #include "Actividad.h"
 
 
-
+//Constructor utilizado cuando la información proviene del archivo .txt
 Actividad::Actividad(System::String^ info)
 {
 	sig = nullptr;
@@ -33,6 +33,7 @@ Actividad::Actividad(System::String^ info)
 	materiales = msclr::interop::marshal_as<std::string>(info);
 }
 
+//Constructor utilizado en la creación de nuevas actividades
 Actividad::Actividad(int ID, System::String^ info, System::DateTime^ fecha, int hF, int minF, int P, System::String^ people, System::String^ place, System::String^ material)
 {
 	sig = nullptr;
@@ -57,6 +58,7 @@ Actividad::~Actividad()
 {
 }
 
+//Redefinición de la función virtual para mostrar el estado de la actividad
 System::String^ Actividad::ToString() const {
 	System::String^ texto = "Actividad," + System::Convert::ToString(id) + "," + gcnew System::String(descripción.c_str()) + ",";
 	System::DateTime^ fechaIn = gcnew System::DateTime(año, mes, día);
@@ -66,6 +68,7 @@ System::String^ Actividad::ToString() const {
 	return texto;
 }
 
+//Redefinición de la función virtual para cuando ocurre el evento
 bool Actividad::Mostrar() const {
 	System::Windows::Forms::MessageBox::Show(ToString(), "Actividad");
 	return false;

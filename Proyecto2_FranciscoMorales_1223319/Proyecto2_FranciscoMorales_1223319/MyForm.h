@@ -207,6 +207,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 #pragma endregion
 		MyForm1^ agenda;
 
+		//Inicia sesión con un usuario ya existente
 	private: System::Void iniciarBtn_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (usuarioTbx->Text != "" && contraseñaTbx->Text != "") {
 			StreamReader^ lector = gcnew StreamReader("..//Users.txt");
@@ -236,6 +237,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 		}
 	}
 
+			 //Registra a un nuevo usuario a la aplicación
 	private: System::Void registrarBtn_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (usuarioTbx->Text != "" && contraseñaTbx->Text != "") {
 			StreamReader^ lector = gcnew StreamReader("..//Users.txt", true);
@@ -270,6 +272,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 		}
 	}
 
+			 //Importa un archivo .txt de un usuario y lo agrega a la lista de usuarios
 	private: System::Void importarBtn_Click(System::Object^  sender, System::EventArgs^  e) {
 		try {
 			abrirArchivo->FileName = "";

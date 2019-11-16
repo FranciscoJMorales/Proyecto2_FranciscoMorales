@@ -1,7 +1,7 @@
 #include "Recordatorio.h"
 
 
-
+//Constructor utilizado cuando la información proviene del archivo .txt
 Recordatorio::Recordatorio(System::String^ info)
 {
 	sig = nullptr;
@@ -23,7 +23,7 @@ Recordatorio::Recordatorio(System::String^ info)
 	prioridad = System::Convert::ToInt32(info);
 }
 
-
+//Constructor utilizado en la creación de nuevas alarmas
 Recordatorio::Recordatorio(int ID, System::String^ info, System::DateTime^ fecha, int P)
 {
 	sig = nullptr;
@@ -38,7 +38,7 @@ Recordatorio::Recordatorio(int ID, System::String^ info, System::DateTime^ fecha
 	prioridad = P;
 }
 
-
+//Constructor únicamente utilizado para el método de búsqueda
 Recordatorio::Recordatorio()
 {
 	sig = nullptr;
@@ -50,6 +50,7 @@ Recordatorio::~Recordatorio()
 {
 }
 
+//Redefinición de la función virtual para mostrar el estado del recordatorio
 System::String^ Recordatorio::ToString() const {
 	System::String^ texto = "Recordatorio," + System::Convert::ToString(id) + "," + gcnew System::String(descripción.c_str()) + ",";
 	System::DateTime^ fechaIn = gcnew System::DateTime(año, mes, día);
@@ -58,6 +59,7 @@ System::String^ Recordatorio::ToString() const {
 	return texto;
 }
 
+//Redefinición de la función virtual para cuando ocurre el evento
 bool Recordatorio::Mostrar() const {
 	if (System::Windows::Forms::MessageBox::Show(ToString() + "¿Deseas postponer el recordatorio?", "Recordatorio", System::Windows::Forms::MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::Yes) {
 		return true;

@@ -349,19 +349,23 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 		MyForm2^ formulario;
 		Usuario^ persona;
 
+		//Muestra el formulario de inicio de sesión cuando este se cierra
 	private: System::Void OnClosing(System::Object^  sender, FormClosingEventArgs^  e) {
 		this->Owner->Show();
 	}
 
+			 //Muestra las tareas del usuario en el nuevo día seleccionado
 	private: System::Void calendario_DateChanged(System::Object^  sender, System::Windows::Forms::DateRangeEventArgs^  e) {
 		MostrarTareas(calendario->SelectionStart);
 	}
 
+			 //Muestra las taareas del día especificado
 	private: System::Void MostrarTareas(DateTime^ dia) {
 		tareasLbl->Text = "Tareas " + dia->ToString("dd/MM/yyyy") + ":";
 		tareasTbx->Text = persona->MostrarTareasDía(dia);
 	}
 
+			 //Cambia el mes y el año por los nuevos especificados
 	private: System::Void fechaBtn_Click(System::Object^  sender, System::EventArgs^  e) {
 		try {
 			calendario->SelectionStart = Convert::ToDateTime(mesTbx->Text + "/" + añoTbx->Text);
@@ -371,16 +375,19 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 		}
 	}
 
+			 //Muestra el formulario para agregar nuevas tareas
 	private: System::Void agregarBtn_Click(System::Object^  sender, System::EventArgs^  e) {
 		formulario = gcnew MyForm2(persona, calendario->SelectionStart);
 		formulario->Show(this);
 		this->Enabled = false;
 	}
 
+			 //Llama a la función para mostrar las tareas
 	private: System::Void MyForm1_EnabledChanged(System::Object^  sender, System::EventArgs^  e) {
 		MostrarTareas(calendario->SelectionStart);
 	}
 
+			 //Ordena los eventos según el parámetro indicado
 	private: System::Void ordenarBtn_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (idRbtn->Checked) {
 			persona->Ordenar(0);
@@ -394,6 +401,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 		MostrarTareas(calendario->SelectionStart);
 	}
 
+			 //Busca un evento y muestra un mensaje con todos los resultados de la búsqueda
 	private: System::Void buscarBtn_Click(System::Object^  sender, System::EventArgs^  e) {
 		try {
 			String^ resultado = "";
@@ -413,6 +421,7 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 		}
 	}
 
+			 //Solicita una ubicación y exporta el archivo con la agenda del ususario
 	private: System::Void exportarBtn_Click(System::Object^  sender, System::EventArgs^  e) {
 		try {
 			abrirCarpeta->SelectedPath = "..//";
@@ -427,12 +436,14 @@ namespace Proyecto2_FranciscoMorales_1223319 {
 		}
 	}
 
+			 //Revisa cada minuto si ocurre algún evento
 	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
 		DateTime^ hora = gcnew DateTime(2019, 11, 16);
 		persona->RevisarEventos(hora->Now);
 		MostrarTareas(calendario->SelectionStart);
 	}
 
+			 //Inicia el temporizador
 	private: System::Void MyForm1_Load(System::Object^  sender, System::EventArgs^  e) {
 		timer1->Start();
 	}

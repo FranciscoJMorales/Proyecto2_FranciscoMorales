@@ -1,7 +1,7 @@
 #include "Usuario.h"
 
 
-
+//Constructor que asigna los datos del usuario, así como sus eventos si ya los tenía
 Usuario::Usuario(String^ info)
 {
 	eventos = new Lista();
@@ -25,6 +25,7 @@ Usuario::Usuario(String^ info)
 	}
 }
 
+//Agrega un nuevo evento al final de la lista y lo escribe en el archivo .txt
 void Usuario::Agregar(Evento *nuevo) {
 	nuevo->id = ObtenerNuevoId();
 	eventos->Agregar(nuevo);
@@ -33,12 +34,14 @@ void Usuario::Agregar(Evento *nuevo) {
 	escritor->Close();
 }
 
+//Devuelve la información del archivo .txt del usuario
 String^ Usuario::Exportar() {
 	String^ info = nombre + "," + contraseña + "\r\n";
 	info += eventos->String();
 	return info;
 }
 
+//Ordena los eventos según el parámetro indicado
 void Usuario::Ordenar(int caso) {
 	Evento *i = eventos->head;
 	bool intercambio = true;
@@ -60,6 +63,7 @@ void Usuario::Ordenar(int caso) {
 	escritor->Close();
 }
 
+//Busca un evento dependiendo del parámetro y del valor por buscar
 String^ Usuario::Buscar(int caso, String^ valorBuscar) {
 	Evento *i = eventos->head;
 	Evento *valor = new Recordatorio();
@@ -89,6 +93,7 @@ String^ Usuario::Buscar(int caso, String^ valorBuscar) {
 	return resultado;
 }
 
+//Compara dos eventos y devuelve un entero indicando la relación entre estos en el parámetro indicado
 int Usuario::Comparar(Evento *a, Evento *b, int caso) {
 	switch (caso) {
 		//Identificador
@@ -138,6 +143,7 @@ int Usuario::Comparar(Evento *a, Evento *b, int caso) {
 	}
 }
 
+//Intercambia la posición de los dos eventos especificados. Utilizado al ordenar los eventos
 void Usuario::Intercambiar(Evento *a, Evento *b) {
 	if (a == eventos->head) {
 		eventos->head = b;
@@ -163,6 +169,7 @@ void Usuario::Intercambiar(Evento *a, Evento *b) {
 	b->sig = a;
 }
 
+//Devuelve un string con todas las tareas pendientes del día indicado
 String^ Usuario::MostrarTareasDía(DateTime^ day) {
 	Evento *i = eventos->head;
 	String^ tareas = "";
@@ -175,6 +182,7 @@ String^ Usuario::MostrarTareasDía(DateTime^ day) {
 	return tareas;
 }
 
+//Genera un nuevo identificador, el cual se utiliza al agregar un evento nuevo
 int Usuario::ObtenerNuevoId() {
 	int ID = 0;
 	Evento* i = eventos->head;
@@ -190,6 +198,7 @@ int Usuario::ObtenerNuevoId() {
 	return ID;
 }
 
+//Revisa el listado de eventos para saber si ya es hora de mostrar alguno de estos
 void Usuario::RevisarEventos(DateTime^ hora) {
 	Evento *i = eventos->head;
 	while (i != nullptr) {

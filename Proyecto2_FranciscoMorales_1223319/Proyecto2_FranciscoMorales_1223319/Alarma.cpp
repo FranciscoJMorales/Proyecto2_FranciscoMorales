@@ -1,7 +1,7 @@
 #include "Alarma.h"
 
 
-
+//Constructor utilizado cuando la información proviene del archivo .txt
 Alarma::Alarma(System::String^ info)
 {
 	sig = nullptr;
@@ -23,7 +23,7 @@ Alarma::Alarma(System::String^ info)
 	prioridad = System::Convert::ToInt32(info);
 }
 
-
+//Constructor utilizado en la creación de nuevas alarmas
 Alarma::Alarma(int ID, System::String^ info, System::DateTime^ fecha, int P)
 {
 	sig = nullptr;
@@ -43,6 +43,7 @@ Alarma::~Alarma()
 {
 }
 
+//Redefinición de la función virtual para mostrar el estado de la alarma
 System::String^ Alarma::ToString() const {
 	System::String^ texto = "Alarma," + System::Convert::ToString(id) + "," + gcnew System::String(descripción.c_str()) + ",";
 	System::DateTime^ fechaIn = gcnew System::DateTime(año, mes, día);
@@ -51,6 +52,7 @@ System::String^ Alarma::ToString() const {
 	return texto;
 }
 
+//Redefinición de la función virtual para cuando ocurre el evento
 bool Alarma::Mostrar() const {
 	if (System::Windows::Forms::MessageBox::Show(ToString() + "¿Deseas postponer la alarma?", "Alarma", System::Windows::Forms::MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::Yes) {
 		return true;

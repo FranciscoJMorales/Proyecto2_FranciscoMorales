@@ -1,7 +1,7 @@
 #include "Lista.h"
 
 
-
+//Constructor
 Lista::Lista()
 {
 	head = nullptr;
@@ -14,6 +14,7 @@ Lista::~Lista()
 {
 }
 
+//Agrega un nuevo evento al final de la lista
 void Lista::Agregar(Evento *nuevo) {
 	length++;
 	tail = nuevo;
@@ -25,6 +26,7 @@ void Lista::Agregar(Evento *nuevo) {
 	}
 }
 
+//Elimina el elemento en la posición especificada
 Evento *Lista::Eliminar(int posicion) {
 	if (head != nullptr) {
 		if (posicion == 0) {
@@ -59,10 +61,12 @@ Evento *Lista::Eliminar(int posicion) {
 	}
 }
 
+//LLama a una funció recursiva para devolver el estado de la lista
 System::String^Lista::String() {
 	return StringRecursivo(head);
 }
 
+//Agrega un nuevo evento al final de la listade forma recursiva
 void Lista::AgregarRecursivo(Evento *nuevo, Evento *pos) {
 	if (pos->sig != nullptr) {
 		AgregarRecursivo(nuevo, pos->sig);
@@ -73,6 +77,7 @@ void Lista::AgregarRecursivo(Evento *nuevo, Evento *pos) {
 	}
 }
 
+//Elimina el evento especificado de la lista de forma recursiva
 Evento *Lista::EliminarRecursivo(Evento *pos, int cantidad) {
 	if (cantidad > 0) {
 		if (pos->sig != nullptr) {
@@ -96,6 +101,7 @@ Evento *Lista::EliminarRecursivo(Evento *pos, int cantidad) {
 	}
 }
 
+//Función recursiva que devuelve el estado de todos los eventos en la lista
 System::String^Lista::StringRecursivo(Evento *pos) {
 	if (pos != nullptr) {
 		if (pos->sig == nullptr) {
